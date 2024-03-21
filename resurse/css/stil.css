@@ -1,0 +1,24 @@
+
+p{
+    color:var(--color1);
+}
+
+h2{
+    border:2px solid var(--color1);
+}
+
+.first_one {
+    color: var(--culoare-inchisa);
+    font-style: italic;
+  }
+  
+  .plus {
+    font-weight: bold;
+    color: black;
+  }
+  
+  .second_one {
+    font-style: italic;
+    color: var(--color6);
+  }
+  

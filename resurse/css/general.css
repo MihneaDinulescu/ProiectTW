@@ -1,0 +1,124 @@
+body{
+  --color1: #FA815F;
+  --color2: #FAAC46;
+  --color3: #FA9C5F;
+  --color4: #FA655F;
+  --color5: #FAB10C;
+  --color6: #cc0000;
+  --culoare-deschisa: #ffcb5a;
+  --culoare-inchisa: #b66700;
+  --culoare-text: black;
+  --culoare-text-selectat: white;
+  --spatiere:100px;
+  background-color: #FAF8D4;
+  padding-left:var(--spatiere);
+  padding-right:var(--spatiere);
+}
+
+
+#link-top{
+  position:fixed;
+  bottom:0.3em;
+  opacity:0.5;
+  left:0.3em;
+  width:3rem;
+  box-sizing: border-box;
+  height:3rem;
+  line-height:3rem;
+  text-align:center;
+  border:3.5px solid var(--color3);
+  border-radius:50%;
+  background: rgb(255, 255, 255);
+  transition: opacity 2s;
+  transition-duration: 500ms;
+  box-shadow: 0px 0px 7px 7px rgba(0, 0, 0, 0.742);
+}
+
+#link-top:hover{
+  opacity:1;
+}
+
+#triunghi-mic {
+  position: relative;
+  left:0px;
+  height:1.5px;
+  width:1.5px;
+  display:inline-block;
+  border-bottom:1.5rem solid var(--color3);
+  border-left:0.7rem solid transparent;
+  border-right:0.7rem solid transparent;
+  vertical-align: top;
+  transform: translateY(30%);
+}
+
+#triunghi-mic span {
+  position: absolute;
+  font-size: 19px;
+  top: -400%;
+  left: 50%;
+  bottom: 50%;
+  color: white;
+  transform: translate(-50%, -50%);
+}
+
+#tab-orar {
+  border-spacing: 2px;
+  border-collapse: collapse;
+  color: black;
+}
+
+#tab-orar tr:hover {
+  background-color: var(--color2);
+  transition: background-color 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+  .table-container {
+    overflow-x: auto;
+    max-width: 100%;
+  }
+  #tab-orar {
+    table-layout: fixed;
+    width: 100%;
+    border-spacing: 0;
+  }
+}
+
+#tab-orar td, #tab-orar th{
+  border: 1px solid black;
+}
+
+#tab-orar thead th:nth-child(2n+1){
+  background-color: var(--color5);
+}
+#tab-orar thead th:nth-child(2n){
+  background-color: var(--color1)
+}
+
+.taburi-iframe {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.button-link {
+  display: block;
+  width: 150px;
+  height: 50px;
+  background-color: var(--color1);
+  border: 1px solid yellow;
+  border-radius: 10px 10px 0 0;
+  color: yellow;
+  text-align: center;
+  line-height: 50px;
+  text-decoration: none;
+  font-size: 20px;
+  margin: 2px 3px;
+  transition: 2s;
+  transition-duration: 500ms;
+  box-shadow: 0px 0px 7px 7px rgba(47, 47, 47, 0.4);
+}
+
+.button-link:hover {
+  background-color: var(--color6);
+}
