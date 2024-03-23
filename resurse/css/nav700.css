@@ -21,7 +21,7 @@ ul.meniu{
     z-index: 2;
     position: relative;
     transform-origin: 0 0;
-    animation-name: aparitie_meniu_p;
+    animation-name: revelation;
     animation-iteration-count:1;
     animation-duration:0.7s;
     animation-fill-mode:forwards;
@@ -70,13 +70,13 @@ nav ul.meniu>li li a:before{
 
 }
 
-@keyframes aparitie_meniu_p{
+@keyframes revelation {
     0%{
-        opacity:0;
-        
+        clip-path:circle(0% at 0% 0%);
     } 
-	100%{
-    	opacity:1;
+    100%{
+        clip-path:circle(100% at 50% 0%);
+
     }
 }
 
@@ -88,3 +88,4 @@ nav ul.meniu>li li a:before{
     	transform:scale(1,1);
     }
 }
+
