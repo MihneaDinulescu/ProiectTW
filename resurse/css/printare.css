@@ -1,102 +1,84 @@
+#link-top, #banner, #watermark {
+    display: none;
+}
+
+  .container-iframe{
+	display:none;
+}
+
+
+
 @media print {
-
-	#absolut {
-        position: absolute;
+    #banner, #watermark {
         display: block;
+    }
+
+    #banner {
+        position: fixed;
         top: 0;
-        width: 50%; 
-        height: 20px;
         right: 0;
-        overflow: visible;
-        border: 5px double black; 
+        width: calc(50% - 2cm);
+        border: 4px double var(--culoare-inchisa);
+        padding: 10px;
+        text-align: center;
     }
 
-    #absolut::after {
-        content: "Element poziționat absolut pe a doua pagină.Pentru a vedea stilul de printare apăsați Ctrl+P.";
-        position: absolute;
-        font-size: 10px;
-        right: 0;
-        border: 5px double black;
-        width: 200px;
-        height: 35px;
-        display: inline-block;
+    #watermark {
+        position: fixed;
+        width: 60%;
+        height: 10%;
+        top: 45%;
+        left: 20%;
+        text-align: center;
+        z-index: 9999;
+    }
+    
+    #watermark p {
+        color: var(--culoare-inchisa);
+        font-size: 50px;
+        margin: 0;
+        transform: rotate(-30deg);
     }
 
-	h1{
-		page-break-after: always;
-		margin-top: 50%;
-		text-align:center;
-		margin-left:1cm;
-	}
-  #grid-pag{
-		font-size: 10px;
-		box-sizing:border-box;
-		page-break-before:always;
-		background-color: white;
-		
-		display:block;
-		}
-		html, body {
-        width: 210mm;
-       
-				overflow:visible !important;
-		}
-
-
-	
-	#grid-pag div:nth-child(5){
-		
-		page-break-before:always;
-	}
-
-	#link-top{
-        display: none;
+    header,
+    footer {
+        page-break-before: always;
     }
 
-    img, video, .container-iframe {
-        display: none;
+    main {
+        display: block;
     }
 
-
-    figcaption {
+    img,
+    video,
+    iframe,
+    a[href="#top"] {
         display: none;
     }
 
     a {
         text-decoration: none;
-        color: inherit;
+        color: var(--culoare-inchisa);
     }
-    .back-to-top {
-        display: none;
-    }
-		#watermark
-		{
-			display: block;
-			position: fixed;
-			bottom:0;
-			color:rgba(0,0,0,0.4);
-			right:0;
-            height: 10%;
-            width: 60%;
-            top: 50%;
-            left: 50%;
-		}
-		#watermark::after{
-			
-			opacity:0.3;
-			padding:5px;
-			display: block;
-			background: white;
-			border:2px solid black;
-			border-top-left-radius:10px;
-			border-bottom-left-radius:10px;
-			border-right:none;
-			content:"Dinulescu Mihnea Stefan";
-		}
 
-	#end{
-		page-break-before: always;
-	}
+    h1 {
+        text-align: center;
+    }
+
+    nav ul {
+        list-style-type: none;
+        text-align: center;
+    }
+
+    nav ul li {
+        display: block;
+        position: relative;
+    }
+
+    nav ul li ul {
+        display: none;
+        position: relative;
+    }
 }
 
 	@page {
