@@ -122,3 +122,14 @@ body{
 .button-link:hover {
   background-color: var(--color6);
 }
+
+::cue{
+  background-color: var(--culoare-deschisa);
+  color: var(--culoare-inchisa);
+  font-size: 1em;
+}
+
+::cue > :c(.cuv1) {
+  text-decoration: underline;
+}
+

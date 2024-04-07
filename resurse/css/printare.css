@@ -1,17 +1,22 @@
-#link-top, #banner, #watermark {
-    display: none;
+#banner , #watermark{
+    display:none;
 }
-
-  .container-iframe{
-	display:none;
-}
-
 
 
 @media print {
-    #banner, #watermark {
+    #banner, #watermark, #grid-pagina {
         display: block;
     }
+
+
+    #link-top {
+        display: none;
+    }
+    
+      .container-iframe{
+        display:none;
+    }
+ 
 
     #banner {
         position: fixed;
