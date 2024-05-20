@@ -1,0 +1,77 @@
+#galerie-statica {
+  padding-left: 0.2em;
+  padding-right: 0.2em;
+}
+
+#grid-galerie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(6, 1fr); /* Adjusted to 6 rows */
+  grid-row-gap: 0.5em;
+  grid-column-gap: 0.5em;
+  counter-reset: nrimag 0;
+}
+
+#grid-galerie img {
+  width: 100%;
+}
+
+#grid-galerie figcaption {
+  text-align: center;
+  counter-increment: nrimag 1; 
+}
+
+#grid-galerie figcaption::before {
+  content: counter(nrimag, lower-roman) ") "; 
+}
+
+/* Set specific cells to have blanks */
+#grid-galerie>figure:nth-child(3),
+#grid-galerie>figure:nth-child(5),
+#grid-galerie>figure:nth-child(7) {
+  visibility: hidden; /* Hide the figures */
+}
+
+#grid-galerie figure:hover {
+  box-shadow: grey 0px 0px 7px;
+}
+
+#grid-galerie figure {
+  transition: all 1s linear;
+}
+
+@media screen and (max-width: 500px) {
+  #grid-galerie {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 800px) {
+
+    #grid-galerie {
+      grid-template-columns: repeat(2, 1fr); /* Grid pe 2 coloane pentru ecrane mici */
+    }
+}
+
+/* Stilul inițial pentru imaginile din galerie */
+#grid-galerie img {
+  filter: sepia(100%);
+  transition: filter 0.8s ease;
+}
+
+/* Stilul inițial pentru textul asociat imaginilor */
+#grid-galerie figcaption {
+  color: #000; /* culoare text */
+  transition: color 0.8s ease;
+  text-shadow: none; /* fără umbră inițial */
+}
+
+/* Efecte la trecerea cursorului peste imagine */
+#grid-galerie img:hover {
+  filter: sepia(0%);
+}
+
+#grid-galerie figcaption:hover {
+  color: #fff; /* culoare text schimbată */
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* umbra treptată */
+}

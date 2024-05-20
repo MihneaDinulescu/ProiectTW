@@ -21,4 +21,35 @@ h2{
     font-style: italic;
     color: var(--color6);
   }
+
+
+  #linkuri {
+    position: relative;
+  }
+  
+  /* Efect hover cu gradient colorat */
+  #linkuri:hover {
+    background-image: radial-gradient(ellipse at center, var(--color2) 0%, var(--color3) 40%, transparent 80%, transparent 100%);
+    background-size: 0% 0%; /* Dimensiuni initiale pentru gradient */
+    transition: background-size 0.8s ease-in-out; /* Tranzitie pentru marimea gradientului */
+  }
+  
+  /* Marimea finala a gradientului la hover */
+  #linkuri:hover {
+    background-size: 100% 100%;
+  }
+  
+  /* Adaugare bordura la click (:active state) */
+  #linkuri:active {
+    border: 1px solid red;
+    padding: -1px;
+  }
+  
+  /* Stilizare pentru elementul dinaintea linkului */
+  #linkuri::before {
+    font-size: 150%;
+    margin-right: 0.3em;
+    color: var(--color4); /* Culoare implicita */
+  }
+  
   

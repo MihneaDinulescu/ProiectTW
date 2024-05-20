@@ -9,28 +9,29 @@
 
         <style>
 
+
+
+            a[href^="http"] {
+                color: var(--color2); /* Culoarea simbolului la hover */
+            }
+    
+            a[href^="http"]:active {
+                color: var(--culoare-text-selectat); /* Culoarea simbolului la hover */
+            }
+    
             a[href^="http"]::before {
-                content: "⮳"; /* Simbolul pentru linkuri externe /
-                font-size: 150%; / Mărimea fontului pentru simbol /
-                margin-right: 0.2em; / Spațiu între simbol și textul linkului /
+                content: "⮳"; /* Simbolul pentru linkuri externe */
+                font-size: 150%; /* Mărimea fontului pentru simbol */
+                margin-right: 0.2em; /* Spațiu între simbol și textul linkului */
             }
     
-             / Schimbarea culorii simbolului atunci când cursorul este pe deasupra /
+             /* Schimbarea culorii simbolului atunci când cursorul este pe deasupra */
             a[href^="http"]:hover::before {
-                color: var(--culoare-deschisa); / Culoarea simbolului la hover */
+                color: var(--culoare-deschisa); /* Culoarea simbolului la hover */
             }
     
-            a:visited{
-                color:var(--culoare-1);
-            }
-    
-            a:active{
-                color:var(--culoare-text-selectat);
-                border:2px solid var(--culoare-text);
-            }
-    
-            a:link{
-                    color:var(--culoare-text);
+            a[href^="http"]:visited {
+                color: var(--link-visited-color); /* Culoarea simbolului la hover */
             }
     
             </style>
@@ -47,6 +48,45 @@
                 <h2>Bine ati venit</h2>
                 <p>Ip: <%- locals.ip%></p>
                 <p class="intro" >Bine ati venit la <strong>Clothes Select</strong>, <abbr title="magazin">magazinul</abbr> online de <b>haine</b> din Bucuresti! Descoperiti o gama variata de tricouri, pantaloni, geci, pantofi si multe alte piese vestimentare perfecte pentru a va completa garderoba în cel mai autentic stil. Magazinul nostru ofera o multitudine de articole de imbracaminte pentru barbati, femei si copii. Explorați colecțiile noastre alaturi de oferte de nepierdut și transformați-vă visele de modă în realitate cu doar câteva clicuri!</p>
+                
+                <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button>
+                <section id="galerie-statica" class="contain-section">
+                    <h2>Galerie</h2>
+                    <div id="grid-galerie">
+                        <% 
+                            var zile = ["duminica", "luni", "marti", "miercuri", "joi", "vineri", "sambata"];
+                            var d = new Date();
+                            var ziuaCurenta = zile[d.getDay()];
+                            var imagini = locals.imagini;
+                            var counter = 1;
+                
+                            for (let imag of imagini) {
+                                var intervaleZile = imag.intervale_zile;
+                                if (intervaleZile) {
+                                    for (let interval of intervaleZile) {
+                                        var ziuaInceput = interval[0];
+                                        var ziuaSfarsit = interval[1];
+                                        // Verificăm dacă ziua curentă se află în intervalul de zile pentru imagine
+                                        if (zile.indexOf(ziuaCurenta) >= zile.indexOf(ziuaInceput) && zile.indexOf(ziuaCurenta) <= zile.indexOf(ziuaSfarsit)) {
+                        %>
+                                            <figure>
+                                                <picture>
+                                                    <source srcset="<%= imag.fisier_mediu %>" media="(max-width:400px)"/>
+                                          <img src="<%= imag.fisier_imagine %>" alt="<%= imag.continut_alternativ %>">
+                                                </picture>
+                                                <figcaption><%=imag.descriere_poza %></figcaption>
+                                            </figure>
+                        <% 
+                                            counter++;
+                        
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        %>
+                    </div>
+                </section>
                 
                 <div class="intro-oferte"><div>Tricouri</div><div>Pantaloni</div><div>Geci</div><div>Pantofi</div><div>Rochii</div></div>
                 <p class="anunt intro">Puteti achizitiona articole vestimentare atât de la sediul nostru cât și la propriul dumneavoastră domiciliu, cu ajutorul ofertei noastre de livrare a produselor prin curier.</p>
@@ -257,11 +297,14 @@
             <section id="anunturi">
                 <h2>Anunțuri</h2> 
                 <p><time datetime="2022-01-05">5 ianuarie 2022</time> <strong>No more Covid!!!!</strong></p>
+                <hr class="styled-hr">
                 <p><time datetime="2022-07-05">5 iulie 2022: "Am adăugat un articol nou în colecție" - Suntem încântați să vă anunțăm că am adăugat un nou articol în colecția noastră! Descoperiți cel mai recent trend în moda și bucurați-vă de alegerea dvs. în materie de stil.</p>
                 <p><time datetime="2022-09-15">15 septembrie 2022: "Am adăugat un nou model de pantaloni în stoc" - Vă prezentăm un nou model de pantaloni care combină confortul cu eleganța. Descoperiți-l acum în magazinul nostru și completați-vă garderoba cu ultimele noutăți în modă!</p>
                 <p><time datetime="2022-12-28">28 decembrie 2022: "Am adăugat un nou model de geacă în colecție" - Încheiem anul cu o notă de prospețime! Descoperiți noul nostru model de geacă, perfect pentru sezonul rece. Vă așteptăm în magazin să vă bucurați de cele mai noi achiziții în modă!</p>
                 <p><time datetime="2023-01-01">1 ianuarie 2023</time> Un an nou fericit!</p>
-            </section>
+                <div id="imagine"></div>
+            
+                </section>
 
             <section id="date_site">
                 <h2>Date site</h2>

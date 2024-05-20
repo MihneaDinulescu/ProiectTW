@@ -10,11 +10,49 @@ body{
   --culoare-text: black;
   --culoare-text-selectat: white;
   --spatiere:100px;
+  --link-visited-color: #8200ae; /* Color for visited links */
+    --external-link-hover-color: #000000; /* Color for hover effects */
+    --link-hover-background-color: #87CEFA; /* Color for the hover blob */
   background-color: #FAF8D4;
   padding-left:var(--spatiere);
   padding-right:var(--spatiere);
 }
 
+body.dark{
+  --culoare-mov:rgb(31, 31, 31);
+--culoare-roz-inchis:rgb(64,27,66);
+--culoare-roz-inchis-t:rgb(64,27,66,0.5);
+  --cl-marcare:rgb(81,43,81,0.5);
+  --cl-light-t:rgba(255,255,255,0.2);
+  --cl-text:white;
+  text-shadow:0px 0px 2px black,0px 0px 1px black,0px 0px 1px black;
+  --imag-body-backgr:url("../imagini/background-bomboane-dark.jpg");
+  --gradient-body:linear-gradient(transparent, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%, transparent);
+  --background-color: rgb(111, 0, 155);
+}
+
+.theme-toggle {
+  position: relative;
+  width: 40px; 
+  overflow: hidden;
+}
+
+.theme-toggle i {
+  position: absolute;
+  top: 30%;
+  left:5%;
+  right: 5%;
+  font-size: 14px;
+  transition: transform 0.5s ease;
+}
+
+.dark-mode .theme-toggle i:first-child {
+  transform: translateX(-100%); 
+}
+
+.theme-toggle i:last-child {
+  transform: translateX(100%); 
+}
 
 #link-top{
   position:fixed;
@@ -131,5 +169,94 @@ body{
 
 ::cue > :c(.cuv1) {
   text-decoration: underline;
+}
+
+
+#container {
+  position: relative;
+}
+
+#text {
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: bold;
+  position: relative;
+}
+
+#text-reflectat {
+  font-size: 50px;
+  line-height: 50px;
+  font-weight: bold;
+  position: absolute;
+  top: -5px; 
+  left: -25px;
+  transform-origin: left bottom;
+  transform: rotateX(180deg) skew(-50deg) scaleY(0.5) translate(20px, 0);
+  opacity: 0.5;
+  filter: blur(1.2px);
+  transition: transform 1s linear;
+}
+
+#text-reflectat:hover {
+  transform: rotateX(180deg) skew(-50deg) scaleY(0.75) translate(20px, 0);
+}
+
+@media screen and (max-width: 768px) {
+  #text {
+    font-size: 6vw; /* Redu dimensiunea fontului pentru ecrane mici */
+  }
+
+  #text-reflectat {
+    font-size: 6vw;
+    top: -13px; /* Redu dimensiunea fontului pentru ecrane mici */
+  }
+}
+
+
+#imagine {
+  position: relative;
+  background-image: url("http://irinaciocan.ro/imagini/plante.jpg");
+  background-size: cover;
+  width: 500px;
+  height: 500px;
+  filter: grayscale(0%);
+  transition: filter 2s linear;
+}
+
+#imagine:after,
+#imagine:before {
+  content: " ";
+  position: absolute;
+  top: 0;
+  width: 0;
+  height: 100%;
+  transition: all 2s linear;
+}
+
+#imagine:after {
+  background-color: rgb(0, 0, 255);
+  mix-blend-mode: lighten;
+  left: 0;
+}
+
+#imagine:before {
+  background-color: rgb(205, 0, 255);
+  mix-blend-mode: darken;
+  right: 0;
+}
+
+#imagine:hover:after,
+#imagine:hover:before {
+  width: 100%; 
+}
+
+
+
+.styled-hr{
+  height: 2px; /* Înălțimea liniei HR */
+  background-image: linear-gradient(to right, #1a1a1a 10%, transparent 10%);
+  background-size: 20px 2px; /* Lungimea și înălțimea unui segment */
+  background-repeat: repeat-x; /* Repetă pe orizontală */
+  border: none; /* Elimină orice bordură */
 }
 
