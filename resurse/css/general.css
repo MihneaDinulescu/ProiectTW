@@ -252,11 +252,40 @@ body.dark{
 
 
 
-.styled-hr{
-  height: 2px; /* Înălțimea liniei HR */
-  background-image: linear-gradient(to right, #1a1a1a 10%, transparent 10%);
-  background-size: 20px 2px; /* Lungimea și înălțimea unui segment */
-  background-repeat: repeat-x; /* Repetă pe orizontală */
-  border: none; /* Elimină orice bordură */
+#banner-1 {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 25vw; /* 25% din lățimea ecranului */
+  height: 25vw; /* latura va fi egală cu 25% din lățimea ecranului */
+  background-color: #336699; /* culoare conform schemei cromatice alese */
+  color: #ffffff; /* culoare text */
+  opacity: 0; /* inițial opacitatea este setată la 0 */
+  transition: opacity 0.75s, background-color 0.75s; /* tranziție pentru opacitate și culoare */
+  animation: showBanner 5s forwards;
 }
 
+#ok_cookies {
+  background-color: #ffffff; /* culoare buton */
+  color: #336699; /* culoare text buton */
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* Stilizare la hover pentru buton */
+#ok_cookies:hover {
+  background-color: #f9d001;
+}
+
+/* Animatie pentru afisarea bannerului */
+@keyframes showBanner {
+  0% {
+    transform: translate(-100%, 100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 0.75;
+  }
+}

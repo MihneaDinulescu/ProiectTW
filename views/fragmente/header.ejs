@@ -41,7 +41,7 @@
 
 
         </li>
-        <li class="drop-down"><a href="#">Inregistrare</a></li>
+        <li class="drop-down"><a href="/inregistrare">Inregistrare</a></li>
         <li class="drop-down"><div>Despre</div>
             <ul>
                 <li><a href="/despre#prezentare">Prezentare</a></li>
@@ -62,5 +62,9 @@
 
         </li>
         <li class="drop-down"><a href="#">Contact</a></li>
+        <%- include("submeniu-utilizator-logat.ejs")
+                %>
+                <%- include("submeniu-administrare.ejs")
+                %>
     </ul>
 </nav>

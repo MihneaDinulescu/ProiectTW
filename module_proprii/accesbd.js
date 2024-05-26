@@ -23,7 +23,7 @@ class AccesBD{
     initLocal(){
         this.client= new Client({database:"cti_2024",
             user:"mihnea", 
-            password:"12345", 
+            password:"mihnea", 
             host:"localhost", 
             port:5432});
         // this.client2= new Pool({database:"laborator",
@@ -99,7 +99,7 @@ class AccesBD{
      * Selecteaza inregistrari din baza de date
      *
      * @param {ObiectQuerySelect} obj - un obiect cu datele pentru query
-     * @param {function} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
+     * @param {QueryCallBack} callback - o functie callback cu 2 parametri: eroare si rezultatul queryului
      */
     select({tabel="",campuri=[],conditiiAnd=[]} = {}, callback, parametriQuery=[]){
         let conditieWhere="";
