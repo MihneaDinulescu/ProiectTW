@@ -48,9 +48,15 @@
                 <h2>Bine ati venit</h2>
                 <%- include("../fragmente/formular-login.ejs") 
                 %>
+                <%- include("../fragmente/locatie.ejs") 
+                %>
+                <%- include("../fragmente/ora-server-client.ejs") 
+                %>
+
                 <p>Ip: <%- locals.ip%></p>
                 <p class="intro" >Bine ati venit la <strong>Clothes Select</strong>, <abbr title="magazin">magazinul</abbr> online de <b>haine</b> din Bucuresti! Descoperiti o gama variata de tricouri, pantaloni, geci, pantofi si multe alte piese vestimentare perfecte pentru a va completa garderoba în cel mai autentic stil. Magazinul nostru ofera o multitudine de articole de imbracaminte pentru barbati, femei si copii. Explorați colecțiile noastre alaturi de oferte de nepierdut și transformați-vă visele de modă în realitate cu doar câteva clicuri!</p>
-                
+                <%- include("../fragmente/useri-online.ejs") 
+                %>
                 <button type="button" class="btn btn-primary btn-lg">Stil-1-mare</button>
                 <section id="galerie-statica" class="contain-section">
                     <h2>Galerie</h2>
@@ -212,8 +218,10 @@
             </section>
 
             <section id="calendar">
-                <h2>Calendar</h2>
-               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque accumsan posuere nisl. Phasellus vitae enim at velit accumsan consequat. Phasellus nisl augue, condimentum placerat ante ornare, lobortis blandit velit. Duis gravida luctus elit, vel mollis odio pellentesque eu. Mauris porta justo velit, a lobortis risus accumsan vitae. Praesent rhoncus ante et blandit pellentesque. Nulla faucibus neque enim, ac pellentesque tellus condimentum et. Phasellus faucibus interdum eleifend. Nam tincidunt aliquam sodales.</p>
+                <div class="container-calendar">
+                <%- include("../fragmente/evenimente.ejs") 
+                %>
+                </div>
             </section>
             <section id="date_utilizatori">
                 <h2>Date utilizatori</h2>

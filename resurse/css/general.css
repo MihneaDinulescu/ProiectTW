@@ -39,8 +39,8 @@ body.dark{
 
 .theme-toggle i {
   position: absolute;
-  top: 30%;
-  left:5%;
+  top: 40%;
+  left: 8%;
   right: 5%;
   font-size: 14px;
   transition: transform 0.5s ease;
@@ -289,3 +289,4 @@ body.dark{
     opacity: 0.75;
   }
 }
+

@@ -82,9 +82,11 @@ class Utilizator{
             if(err)
                 console.log(err);
             else
-                utiliz.trimiteMail("Te-ai inregistrat cu succes","Username-ul tau este "+utiliz.username,
-            `<h1>Salut!</h1><p style='color:blue'>Username-ul tau este ${utiliz.username}.</p> <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`,
-            )
+            utiliz.trimiteMail("Te-ai inregistrat cu succes", "Username-ul tău este " + utiliz.username,
+            `<h1>Salut!</h1>
+            <p style='color: blue;'>Username-ul tău este ${utiliz.username}.</p> 
+            <div style='font-size: 20px; background-color: lightblue;'>Bine ai venit în comunitatea ${Utilizator.numeDomeniu}!</div> 
+            <p><a href='http://${Utilizator.numeDomeniu}/cod/${utiliz.username}/${token}'>Click aici pentru confirmare</a></p>`);
         });
     }
 //xjxwhotvuuturmqm
