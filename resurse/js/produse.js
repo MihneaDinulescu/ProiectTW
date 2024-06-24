@@ -1,5 +1,5 @@
 window.addEventListener("load" , function(){
-   
+    document.getElementById("i_rad4").checked = true;
     document.getElementById("inp-pret").onchange = function(){
         document.getElementById("infoRange").innerHTML = `(${this.value})`
     }
@@ -22,9 +22,9 @@ window.addEventListener("load" , function(){
             }
             let minGradUzura,maxGradUzura
             if(inpGradUzura !="toate"){
-                vCal = inpGradUzura.split(":")
-                minGradUzura = parseInt(vCal[0])
-                maxGradUzura = parseInt(vCal[1])
+                vGrad = inpGradUzura.split(":")
+                minGradUzura = parseInt(vGrad[0])
+                maxGradUzura = parseInt(vGrad[1])
             }
 
             var inp_pret = parseInt(document.getElementById("inp-pret").value);
@@ -100,7 +100,7 @@ window.addEventListener("load" , function(){
                 if (pret_a == pret_b) {
                     let nume_a = a.getElementsByClassName("val-nume")[0].innerHTML;
                     let nume_b = b.getElementsByClassName("val-nume")[0].innerHTML;
-                    return semn * nume_a.localeCompare(nume_b, undefined, { sensitivity: 'accent' }); 
+                    return semn * nume_a.localeCompare(nume_b); 
                 }
                 return semn * (pret_a - pret_b);
             });
@@ -144,4 +144,74 @@ window.addEventListener("load" , function(){
         }
         
 
+    // CEL MAI IEFTIN produs
+
+
+    var products = document.querySelectorAll(".produs");
+
+
+    var cheapestProducts = {};
+
+
+    products.forEach(function(product) {
+
+        var category = product.querySelector(".val-gen").textContent;
+        var price = parseFloat(product.querySelector(".val-pret").textContent);
+        var productName = product.querySelector(".val-nume").textContent;
+
+
+        if (!(category in cheapestProducts) || price < cheapestProducts[category].price) {
+
+            cheapestProducts[category] = { price: price, productName: productName };
+        }
+    });
+
+
+    Object.keys(cheapestProducts).forEach(function(category) {
+        var cheapestProduct = cheapestProducts[category];
+
+        var productContainer = Array.from(products).find(function(product) {
+            return product.querySelector(".val-nume").textContent === cheapestProduct.productName;
+        });
+        if (productContainer) {
+            var saleTag = document.createElement("span");
+            saleTag.classList.add("sale-tag");
+            saleTag.textContent = "REDUCERE";
+            productContainer.appendChild(saleTag);
+        }
+    });
+
     })
+
+
+
+/* MODAL  */
+document.addEventListener("DOMContentLoaded", function() {
+    var modal = document.getElementById("myModal");
+    var btns = document.querySelectorAll(".produs");
+    var span = document.getElementsByClassName("close")[0];
+
+    btns.forEach(btn => {
+        btn.onclick = function() {
+            modal.style.display = "block";
+
+            var productDetails = "<h2>" + btn.querySelector(".val-nume").textContent + "</h2>"; 
+            productDetails += "<p>" + btn.querySelector(".val-material").textContent + "</p>";
+            productDetails += "<p>" + btn.querySelector(".val-grad_uzura").textContent + "</p>";
+            productDetails += "<p>" + btn.querySelector(".val-marime").textContent + "</p>";
+            productDetails += "<p>" + btn.querySelector(".val-gen").textContent + "</p>";
+
+            document.getElementById("productDetails").innerHTML = productDetails;
+        }
+    });
+
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+});

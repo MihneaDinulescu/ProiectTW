@@ -6,11 +6,39 @@
 #grid-galerie {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(6, 1fr); /* Adjusted to 6 rows */
+  grid-template-rows: repeat(3, 1fr); 
   grid-row-gap: 0.5em;
   grid-column-gap: 0.5em;
   counter-reset: nrimag 0;
 }
+
+#grid-galerie figure:nth-child(1){
+  grid-row: 1;
+  grid-column: 1;
+}
+#grid-galerie figure:nth-child(2) {
+  grid-row: 1;
+  grid-column: 2;
+}
+
+#grid-galerie figure:nth-child(3) {
+  grid-row: 2;
+  grid-column: 1;
+}
+#grid-galerie figure:nth-child(4){
+  grid-row: 2;
+  grid-column: 3;
+}
+#grid-galerie figure:nth-child(5) {
+  grid-row: 3;
+  grid-column: 2;
+}
+#grid-galerie figure:nth-child(6) {
+  grid-row: 3;
+  grid-column: 3;
+}
+
+
 
 #grid-galerie img {
   width: 100%;
@@ -25,12 +53,6 @@
   content: counter(nrimag, lower-roman) ") "; 
 }
 
-/* Set specific cells to have blanks */
-#grid-galerie>figure:nth-child(3),
-#grid-galerie>figure:nth-child(5),
-#grid-galerie>figure:nth-child(7) {
-  visibility: hidden; /* Hide the figures */
-}
 
 #grid-galerie figure:hover {
   box-shadow: grey 0px 0px 7px;
@@ -49,29 +71,29 @@
 @media screen and (max-width: 800px) {
 
     #grid-galerie {
-      grid-template-columns: repeat(2, 1fr); /* Grid pe 2 coloane pentru ecrane mici */
+      grid-template-columns: repeat(2, 1fr); 
     }
 }
 
-/* Stilul inițial pentru imaginile din galerie */
+
 #grid-galerie img {
   filter: sepia(100%);
   transition: filter 0.8s ease;
 }
 
-/* Stilul inițial pentru textul asociat imaginilor */
+
 #grid-galerie figcaption {
-  color: #000; /* culoare text */
+  color: #000; 
   transition: color 0.8s ease;
-  text-shadow: none; /* fără umbră inițial */
+  text-shadow: none;
 }
 
-/* Efecte la trecerea cursorului peste imagine */
+
 #grid-galerie img:hover {
   filter: sepia(0%);
 }
 
 #grid-galerie figcaption:hover {
-  color: #fff; /* culoare text schimbată */
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* umbra treptată */
+  color: #fff; 
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
 }

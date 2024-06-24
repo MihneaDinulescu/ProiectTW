@@ -6,37 +6,6 @@
         <meta name="keywords" content="haine, magazin de haine, Clothes Select, pantofi, tricouri, pantaloni, rochii, geci, oferta, Bucuresti">
         <meta name="description" content="Magazin de haine, Clothes Select, preturi bune, articole de imbracaminte, barbati, femei, copii, pantofi, tricouri, pantaloni, geci, rochii, promotie">
         <title>Clothes Select</title>
-
-        <style>
-
-
-
-            a[href^="http"] {
-                color: var(--color2); /* Culoarea simbolului la hover */
-            }
-    
-            a[href^="http"]:active {
-                color: var(--culoare-text-selectat); /* Culoarea simbolului la hover */
-            }
-    
-            a[href^="http"]::before {
-                content: "⮳"; /* Simbolul pentru linkuri externe */
-                font-size: 150%; /* Mărimea fontului pentru simbol */
-                margin-right: 0.2em; /* Spațiu între simbol și textul linkului */
-            }
-    
-             /* Schimbarea culorii simbolului atunci când cursorul este pe deasupra */
-            a[href^="http"]:hover::before {
-                color: var(--culoare-deschisa); /* Culoarea simbolului la hover */
-            }
-    
-            a[href^="http"]:visited {
-                color: var(--link-visited-color); /* Culoarea simbolului la hover */
-            }
-    
-            </style>
-
-
     </head>
     <body>
     
@@ -66,7 +35,6 @@
                             var d = new Date();
                             var ziuaCurenta = zile[d.getDay()];
                             var imagini = locals.imagini;
-                            var counter = 1;
                 
                             for (let imag of imagini) {
                                 var intervaleZile = imag.intervale_zile;
@@ -85,7 +53,6 @@
                                                 <figcaption><%=imag.descriere_poza %></figcaption>
                                             </figure>
                         <% 
-                                            counter++;
                         
                                             break;
                                         }
@@ -112,25 +79,19 @@
                 </div>
             </div>
 
-            <video controls preload="metadata" poster="resurse/imagini/poster.jpg" width="65%" min-width="300px" max-width="800px">
-                <source src="resurse/video/video.mp4" type="video/mp4" >
-                <source src="resurse/video/video.ogv" type="video/ogv">
-                <track default src="resurse/video/my_captions.vtt" kind="captions" srclang="ro" label="romana" />
-                <track  src="caption_eng.vtt" kind="captions" srclang="en" label="engleza" />
-              </video>
-
             <hr class="vedere_magazin"/>
             <div id="container-video">
  
                 <div id="centrare-video">
                     <div id="clip-video">
                         <div id="stil-video">
-                            <video width="320" height="240"  playsinline autoplay loop muted>
-                                <source src="resurse/video/Chocolate.mp4" type="video/mp4">
-                                <source src="resurse/video/Chocolate.ogv" type="video/ogv">
-                                <track default src="data:image/png;base64, V0VCVlRUIC0gQ2lvY29sYXTEgwoKMDA6MDAuMDAwIC0tPiAwMDowMy4wMDAgbGluZTowCkNpb2NvbGF0xIMhISEKCjAwOjAzLjAwMCAtLT4gMDA6MDcuMDAwIGxpbmU6MApNdWx0xIMgY2lvY29sYXTEgyEhISEKCjAwOjA5LjAwMCAtLT4gMDA6MTQuMDAwIGxpbmU6MApVcHMsIGFtIG11cmTEg3JpdCBtYXNhIQoKMDA6MTQuNTAwIC0tPiAwMDoxOS4wMDAgbGluZTowCk51IGNvbnRlYXrEgyEgQ2lvY29sYXTEg8SDxIPEg8SDxIMhCgo=" kind="captions" srclang="ro" label="romana">
-                                <track src="data:image/png;base64, V0VCVlRUIC0gQ2hvY29sYXRlDQoNCjAwOjAwLjAwMCAtLT4gMDA6MDMuMDAwDQpDaG9jb2xhdGUhISENCg0KMDA6MDMuMDAwIC0tPiAwMDowNy4wMDANCkxvdHMgb2YgY2hvY29sYXRlISEhIQ0KDQowMDowOS4wMDAgLS0+IDAwOjE0LjAwMA0KT3VwcywgdGFibGUgZ290IGRpcnR5IQ0KDQowMDoxNC41MDAgLS0+IDAwOjE5LjAwMA0KRG9lc24ndCBtYXR0ZXIhIENob2NvbGF0ZSEhIQ0KDQo=" kind="captions" srclang="en" label="engleza">
-                            </video>
+                          
+            <video controls preload="metadata" poster="resurse/imagini/poster.jpg" width="65%" min-width="300px" max-width="800px">
+                <source src="resurse/video/video.mp4" type="video/mp4" >
+                <source src="resurse/video/video.ogv" type="video/ogv">
+                <track default src="resurse/video/my_captions.vtt" kind="captions" srclang="ro" label="romana" />
+                <track  src="caption_eng.vtt" kind="captions" srclang="en" label="engleza" />
+              </video>
                         </div>
                     </div>
                 </div>

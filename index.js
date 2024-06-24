@@ -52,7 +52,15 @@ obGlobal={
 
 const uri = "mongodb://localhost:27017";
 obGlobal.clientMongo = new MongoClient(uri);
-obGlobal.bdMongo = obGlobal.clientMongo.db('proiect_web');
+obGlobal.bdMongo = obGlobal.clientMongo.db('cti_2024');
+/*async function afisFacturi(){
+    const facturi=obGlobal.bdMongo.collection('facturi');
+    const query={username:'prof67915'};
+    const factura= await facturi.findOne(query);
+    console.log("Factura:", factura);
+}
+afisFacturi()
+*/
 
 vect_foldere=["temp","temp1","backup","poze_uploadate"]
 for(let folder of vect_foldere){
@@ -235,18 +243,38 @@ app.get("/produse", function(req, res){
     });
 })
 
-app.get("/produs/:id",function(req,res){
-    client.query(`select * from haine where id=${req.params.id}`  , function(err,rez){
-
-        if(err){
-        console.log(err);
-        afisareEroare(res,2);
+app.get("/produs/:id_haina", function(req, res) {
+    client.query('SELECT * FROM haine WHERE id_haina = $1', [req.params.id_haina], function(err, rez) {
+        if (err) {
+            console.log(err);
+            afisareEroare(res, 2);
+        } else {
+            client.query('SELECT DISTINCT b.id_set,s.nume_set from seturi as s join asociere_set as b on s.id = b.id_set WHERE b.id_haina = $1',[req.params.id_haina], function(err, rezQuerySet){
+                if(err){
+                    console.log(err)
+                    afisareEroare(res,2);
+                } else {
+                    let apartine_set = rezQuerySet.rows.length > 0 ? rezQuerySet.rows[0] : null;
+                    res.render("pagini/produs", { prod: rez.rows[0], apartine_set: apartine_set });
+                }
+            });
         }
-        else 
-    res.render("pagini/produs",{prod: rez.rows[0]})
+    });
+});
+
+
+app.get("/seturi" , function(req,res){
+    client.query('select s.nume_set , s.descriere_set , b.id_set , b.id_haina , h.nume ,h.marime,h.culoare,h.material,h.sezoane,h.descriere ,h.pret , h.gen , h.categorie,h.data_adaugare,h.grad_uzura from seturi as s join asociere_set as b on s.id = b.id_set join haine as h on h.id_haina = b.id_haina;' , function(err , rezQuery){
+        if(err){
+            console.log(err);
+            afisareEroare(res, 2);
+        }
+        else{
+            res.render("pagini/seturi" , {seturi : rezQuery.rows})
+            console.log(rezQuery.rows);
+        }
     })
 })
-
 
 // ---------------------------------  cos virtual --------------------------------------
 
@@ -260,7 +288,7 @@ app.post("/produse_cos",function(req, res){
     console.log(req.body);
     if(req.body.ids_prod.length!=0){
         //TO DO : cerere catre AccesBD astfel incat query-ul sa fie `select nume, descriere, pret, gramaj, imagine from prajituri where id in (lista de id-uri)`
-        AccesBD.getInstanta().select({tabel:"haine", campuri:"nume,descriere,pret,marime,imagine".split(","),conditiiAnd:[`id in (${req.body.ids_prod})`]},
+        AccesBD.getInstanta().select({tabel:"haine", campuri:"nume,descriere,pret,marime,imagine".split(","),conditiiAnd:[`id_haina in (${req.body.ids_prod})`]},
         function(err, rez){
             if(err)
                 res.send([]);
@@ -279,11 +307,11 @@ cale_qr=__dirname+"/resurse/imagini/qrcode";
 if (fs.existsSync(cale_qr))
   fs.rmSync(cale_qr, {force:true, recursive:true});
 fs.mkdirSync(cale_qr);
-client.query("select id from haine", function(err, rez){
+client.query("select id_haina from haine", function(err, rez){
     for(let prod of rez.rows){
-        let cale_prod=obGlobal.protocol+obGlobal.numeDomeniu+"/produs/"+prod.id;
+        let cale_prod=obGlobal.protocol+obGlobal.numeDomeniu+"/produs/"+prod.id_haina;
         //console.log(cale_prod);
-        QRCode.toFile(cale_qr+"/"+prod.id+".png",cale_prod);
+        QRCode.toFile(cale_qr+"/"+prod.id_haina+".png",cale_prod);
     }
 });
 
@@ -308,6 +336,29 @@ async function genereazaPdf(stringHTML,numeFis, callback) {
         callback(numeFis);
 }
 
+function insereazaFactura(req,rezultatRanduri){
+    rezultatRanduri.rows.forEach(function (elem){ elem.cantitate=1});
+    let jsonFactura= {
+        data: new Date(),
+        username: req.session.utilizator.username,
+        produse:rezultatRanduri.rows
+    }
+    console.log("JSON factura", jsonFactura)
+    if(obGlobal.bdMongo){
+        obGlobal.bdMongo.collection("facturi").insertOne(jsonFactura, function (err, rezmongo){
+            if (err) console.log(err)
+            else console.log ("Am inserat factura in mongodb");
+
+            obGlobal.bdMongo.collection("facturi").find({}).toArray(
+                function (err, rezInserare){
+                    if (err) console.log(err)
+                    else console.log (rezInserare);
+            })
+        })
+    }
+}
+
+
 app.post("/cumpara",function(req, res){
     console.log(req.body);
 
@@ -315,7 +366,7 @@ app.post("/cumpara",function(req, res){
         AccesBD.getInstanta().select({
             tabel:"haine",
             campuri:["*"],
-            conditiiAnd:[`id in (${req.body.ids_prod})`]
+            conditiiAnd:[`id_haina in (${req.body.ids_prod})`]
         }, function(err, rez){
             if(!err  && rez.rowCount>0){
                 console.log("produse:", rez.rows);
@@ -336,7 +387,7 @@ app.post("/cumpara",function(req, res){
                     }] );
                     res.send("Totul e bine!");
                 });
-                
+                insereazaFactura(req,rez)
             }
         })
     }
@@ -644,6 +695,108 @@ app.get("/suma/:a/:b", function(req,res){
     })
 
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+//////////////// Contact
+
+
+app.use(["/contact"], express.urlencoded({extended:true}));
+
+caleXMLMesaje="resurse/xml/contact.xml";
+headerXML=`<?xml version="1.0" encoding="utf-8"?>`;
+function creeazaXMlContactDacaNuExista(){
+    if (!fs.existsSync(caleXMLMesaje)){
+        let initXML={
+            "declaration":{
+                "attributes":{
+                    "version": "1.0",
+                    "encoding": "utf-8"
+                }
+            },
+            "elements": [
+                {
+                    "type": "element",
+                    "name":"contact",
+                    "elements": [
+                        {
+                            "type": "element",
+                            "name":"mesaje",
+                            "elements":[]                            
+                        }
+                    ]
+                }
+            ]
+        }
+        let sirXml=xmljs.js2xml(initXML,{compact:false, spaces:4});//obtin sirul xml (cu taguri)
+        console.log(sirXml);
+        fs.writeFileSync(caleXMLMesaje,sirXml);
+        return false; //l-a creat
+    }
+    return true; //nu l-a creat acum
+}
+
+
+
+
+
+
+function parseazaMesaje(){
+    let existaInainte=creeazaXMlContactDacaNuExista();
+    let mesajeXml=[];
+    let obJson;
+    if (existaInainte){
+        let sirXML=fs.readFileSync(caleXMLMesaje, 'utf8');
+        obJson=xmljs.xml2js(sirXML,{compact:false, spaces:4});
+        
+
+        let elementMesaje=obJson.elements[0].elements.find(function(el){
+                return el.name=="mesaje"
+            });
+        let vectElementeMesaj=elementMesaje.elements?elementMesaje.elements:[];// conditie ? val_true: val_false
+        console.log("Mesaje: ",obJson.elements[0].elements.find(function(el){
+            return el.name=="mesaje"
+        }))
+        let mesajeXml=vectElementeMesaj.filter(function(el){return el.name=="mesaj"});
+        return [obJson, elementMesaje,mesajeXml];
+    }
+    return [obJson,[],[]];
+}
+
+
+app.get("/contact", function(req, res){
+    let obJson, elementMesaje, mesajeXml;
+    [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
+
+    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:mesajeXml})
+});
+
+app.post("/contact", function(req, res){
+    let obJson, elementMesaje, mesajeXml;
+    [obJson, elementMesaje, mesajeXml] =parseazaMesaje();
+        
+    let u= req.session.utilizator?req.session.utilizator.username:"anonim";
+    let mesajNou={
+        type:"element", 
+        name:"mesaj", 
+        attributes:{
+            username:u, 
+            data:new Date()
+        },
+        elements:[{type:"text", "text":req.body.mesaj}]
+    };
+    if(elementMesaje.elements)
+        elementMesaje.elements.push(mesajNou);
+    else 
+        elementMesaje.elements=[mesajNou];
+    console.log(elementMesaje.elements);
+    let sirXml=xmljs.js2xml(obJson,{compact:false, spaces:4});
+    console.log("XML: ",sirXml);
+    fs.writeFileSync("resurse/xml/contact.xml",sirXml);
+    
+    res.render("pagini/contact",{ utilizator:req.session.utilizator, mesaje:elementMesaje.elements})
+});
+///////////////////////////////////////////////////////
+
+
      app.get("/*.ejs",function(req,res){
         afisareEroare(res,400);
      });
@@ -810,11 +963,43 @@ fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
 
 
 
+// -------------------------------------------------------------------CHAT---------------------------------------------------------------------------
+
+// initializari socket.io
+const http=require('http')
+const socket = require('socket.io');
+const server = new http.createServer(app);  
+var io = socket(server);
+io = io.listen(server);//asculta pe acelasi port ca si serverul
 
 
 
+io.on("connection", (socket) => {  
+    console.log("Conectare!");
+	//if(!conexiune_index)
+	//	conexiune_index=socket
+    socket.on('disconnect', () => {conexiune_index=null;console.log('Deconectare')});
+});
+
+
+app.post('/mesaj', function(req, res) {
+    var form = new formidable.IncomingForm();
+	form.parse(req, function(err, fields, files) {
+        console.log("primit mesaj");
+        console.log(fields);
+		io.sockets.emit('mesaj_nou', fields.nume, fields.culoare, fields.mesaj, fields.font);
+        res.send("ok");
+    });
+});
 
 
 
-app.listen(8080);
+app.get('/chat', function(req, res)  {
+    const utilizator = req.session.utilizator; 
+    res.render('chat', { utilizator: utilizator });
+});
+
+
+server.listen(8080);
 console.log("Serverul a pornit");
+

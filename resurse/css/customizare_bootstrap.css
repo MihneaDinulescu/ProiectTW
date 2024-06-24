@@ -11859,14 +11859,14 @@ input {
   border-radius: 8px;
   border-width: 4px;
   border-color: #ffffff;
-  background-color: navajowhite;
+  background-color: rgb(253, 110, 49);
   margin-top: 20px !important;
 }
 
 .buton-filtrare, .buton-sortDescrescNume, .buton-sortCrescNume, .buton-resetare {
   border-radius: 30px;
   border-width: 4px;
-  background-color: #2EE8D2;
+  background-color: rgb(255, 175, 46);
   border-color: #00398f;
 }
 

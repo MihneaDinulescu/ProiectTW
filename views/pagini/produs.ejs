@@ -31,6 +31,17 @@
                     <p>Purtat <span class="purtat"><%- locals.prod.purtat %> </span></p>
                     <p>Data adăugare: <span class="data_adaugare"><%- locals.prod.data_adaugare %> </span></p>
                     <p>Grad uzura: <span class="grad uzura"><%- locals.prod.grad_uzura %> </span></p>
+                    <p>
+                      Aparatine setului:
+                      <span class="nume_set">
+                          <% if (apartine_set) { %>
+                              <a href="/seturi"><%= apartine_set.nume_set %></a>
+                          <% } else { %>
+                              Niciun set asociat
+                          <% } %>
+                      </span>
+                  </p>
+                  
                     <figure class="imag-produs">
                         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                             <div class="carousel-inner">

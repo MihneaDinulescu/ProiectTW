@@ -30,8 +30,8 @@ h2{
   /* Efect hover cu gradient colorat */
   #linkuri:hover {
     background-image: radial-gradient(ellipse at center, var(--color2) 0%, var(--color3) 40%, transparent 80%, transparent 100%);
-    background-size: 0% 0%; /* Dimensiuni initiale pentru gradient */
-    transition: background-size 0.8s ease-in-out; /* Tranzitie pentru marimea gradientului */
+    background-size: 0% 0%; 
+    transition: background-size 0.8s ease-in-out; 
   }
   
   /* Marimea finala a gradientului la hover */
@@ -49,7 +49,26 @@ h2{
   #linkuri::before {
     font-size: 150%;
     margin-right: 0.3em;
-    color: var(--color4); /* Culoare implicita */
+    color: var(--color4); 
   }
   
+
+  a[href^="http"] {
+    color: var(--color2); 
+}
+
+a[href^="http"]::before {
+    content: "⮳"; 
+    font-size: 150%;
+    margin-right: 0.2em; 
+}
+
+ /* Schimbarea culorii simbolului atunci când cursorul este pe deasupra */
+a[href^="http"]:hover::before {
+    color: var(--culoare-deschisa);
+}
+
+a[href^="http"]:visited {
+    color: var(--link-visited-color); 
+}
   

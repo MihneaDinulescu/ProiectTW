@@ -73,7 +73,7 @@ INSERT into prajituri (nume,descriere,pret, gramaj, calorii, tip_produs, categor
 
 
 CREATE TABLE IF NOT EXISTS haine (
-   id serial PRIMARY KEY,
+   id_haina serial PRIMARY KEY,
    nume VARCHAR(100) UNIQUE NOT NULL,
    descriere TEXT,
    pret NUMERIC(8,2) NOT NULL,
@@ -124,8 +124,87 @@ VALUES ('Cămașă casual', 'Cămașă casual cu mâneci lungi', 39.99, 'xl', 'a
 
 -- Haina 8
 INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
-VALUES ('Blugi boyfriend', 'Blugi boyfriend cu aspect uzat', 69.99, 'xxl', 'bleumarin', 'denim', 'femei', 'pantaloni', '{"toamnă", "iarnă"}', TRUE, 'blugi_boyfriend.jpg', current_timestamp, 8);
+VALUES ('Blugi', 'Blugi cu aspect uzat', 69.99, 'xxl', 'bleumarin', 'denim', 'femei', 'pantaloni', '{"toamnă", "iarnă"}', TRUE, 'blugi_boyfriend.jpg', current_timestamp, 8);
 
 -- Haina 9
 INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
 VALUES ('Trench coat', 'Trench coat clasic din bumbac', 199.99, 's', 'kaki', 'bumbac', 'unisex', 'jachete', '{"primăvară", "toamnă"}', FALSE, 'trench_coat.jpg', current_timestamp, 2);
+
+-- Haina 10
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Hanorac sport', 'Hanorac sport cu glugă', 59.99, 'm', 'gri', 'bumbac', 'unisex', 'sport', '{"primăvară", "toamnă", "iarnă"}', FALSE, 'hanorac_sport.jpg', current_timestamp, 5);
+
+-- Haina 11
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Pantaloni scurți', 'Pantaloni scurți pentru vară', 34.99, 'l', 'bej', 'bumbac', 'barbati', 'pantaloni', '{"vară"}', FALSE, 'pantaloni_scurti.jpg', current_timestamp, 3);
+
+-- Haina 12
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Palton de iarnă', 'Palton elegant pentru iarnă', 249.99, 'xl', 'gri', 'lână', 'femei', 'jachete', '{"iarnă"}', FALSE, 'palton_iarna.jpg', current_timestamp, 7);
+
+-- Haina 13
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Rochie de zi', 'Rochie de zi cu imprimeu floral', 89.99, 's', 'roz', 'bumbac', 'femei', 'rochii', '{"primăvară", "vară"}', FALSE, 'rochie_zi.jpg', current_timestamp, 4);
+
+-- Haina 14
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Sacou casual', 'Sacou casual din in', 99.99, 'm', 'maro', 'in', 'barbati', 'jachete', '{"primăvară", "toamnă"}', FALSE, 'sacou_casual.jpg', current_timestamp, 5);
+
+-- Haina 15
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Eșarfă de mătase', 'Eșarfă elegantă din mătase', 29.99, 'unică', 'albastru', 'mătase', 'unisex', 'accesorii', '{"primăvară", "toamnă"}', FALSE, 'esarfa_matase.jpg', current_timestamp, 2);
+
+-- Haina 16
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Pulover tricotat', 'Pulover tricotat gros', 79.99, 'xxl', 'verde închis', 'lână', 'unisex', 'pulovere', '{"iarnă"}', FALSE, 'pulover_tricotat.jpg', current_timestamp, 6);
+
+-- Haina 17
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Jachetă din piele', 'Jachetă din piele naturală', 299.99, 'l', 'negru', 'piele', 'barbati', 'jachete', '{"toamnă", "iarnă"}', TRUE, 'jacheta_piele.jpg', current_timestamp, 9);
+
+-- Haina 18
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Cămașă office', 'Cămașă office albă', 49.99, 'm', 'alb', 'bumbac', 'barbati', 'cămăși', '{"primăvară", "vară", "toamnă"}', FALSE, 'camasa_office.jpg', current_timestamp, 3);
+
+-- Haina 19
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Pantaloni cargo', 'Pantaloni cargo cu buzunare laterale', 59.99, 'xl', 'verde militar', 'bumbac', 'unisex', 'pantaloni', '{"primăvară", "toamnă"}', FALSE, 'pantaloni_cargo.jpg', current_timestamp, 4);
+
+-- Haina 20
+INSERT INTO haine (nume, descriere, pret, marime, culoare, material, gen, categorie, sezoane, purtat, imagine, data_adaugare, grad_uzura)
+VALUES ('Ghete de drumeție', 'Ghete impermeabile pentru drumeții', 99.99, '42', 'maro', 'piele', 'unisex', 'încălțăminte', '{"toamnă", "iarnă"}', TRUE, 'ghete_drumetie.jpg', current_timestamp, 8);
+
+
+
+
+
+
+
+CREATE TABLE seturi (
+    id SERIAL PRIMARY KEY,
+    nume_set VARCHAR(100) NOT NULL,
+    descriere_set TEXT
+);
+
+INSERT INTO seturi (nume_set, descriere_set) VALUES
+    ('Set haine 1', 'Include pantaloni scurti si palton de iarna.'),
+    ('Set haine 2', 'Include rochie de zi si sacou casual.'),
+    ('Set haine 3', 'Include esarfa cu pulover tricotat.'),
+    ('Set haine 4', 'Include jacheta de piele si camasa office.'),
+    ('Set haine 5', 'Include pantaloni cargo si ghete.');
+
+
+CREATE TABLE asociere_set (
+    id SERIAL PRIMARY KEY,
+    id_set INT NOT NULL,
+    id_haina INT NOT NULL,
+    FOREIGN KEY (id_set) REFERENCES seturi(id),
+    FOREIGN KEY (id_haina) REFERENCES haine(id_haina)
+);
+
+INSERT INTO asociere_set (id_set, id_haina) VALUES
+    (1, 11), (1, 12),
+    (2, 13), (2, 14),
+    (3, 15), (3, 16),
+    (4, 17), (4, 18),
+    (5, 19), (5, 20);

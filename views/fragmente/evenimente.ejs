@@ -1,5 +1,5 @@
 <h2>Calendar</h2>
-<p>Observatie: afiseaza doar luna curentă (evenimentele sunt random)</p>
+<p>Observație: se afișează doar luna curentă (evenimentele sunt random)</p>
 <div id="calendar">
     <div>L</div>
     <div>Ma</div>
@@ -9,41 +9,87 @@
     <div>S</div>
     <div>D</div>
 <% 
-nrZile=[31,28,31,30,31,30,31,31,30,31,30,31];
+// Definim numărul de zile în fiecare lună
+let nrZile = [31,28,31,30,31,30,31,31,30,31,30,31];
 
-d=new Date(); //observatie: este data serverului nu a clinetului; codul ejs fiind compilat pe server
-anCurent=d.getFullYear();
-lunaCurenta=d.getMonth();
-if(anCurent%400==0 || (anCurent%4==0 && anCurent%100!=0)) nrZile[1]=29;
-let nrZileCalendar=nrZile[lunaCurenta]
-let primaZiLuna=new Date(anCurent, lunaCurenta, 1);
-let ultimaZiLuna=new Date(anCurent, lunaCurenta, nrZileCalendar);
-ziSaptPrimaZiLuna=(primaZiLuna.getDay()-1+7)%7;
-ziSaptUltimaZiLuna=(ultimaZiLuna.getDay()-1+7)%7;
-for (let i=0;i<ziSaptPrimaZiLuna;i++){
+// Obținem data curentă
+let d = new Date();
+
+// Extragem anul și luna curentă
+let anCurent = d.getFullYear();
+let lunaCurenta = d.getMonth();
+
+// Verificăm dacă anul curent este bisect
+if (anCurent % 400 == 0 || (anCurent % 4 == 0 && anCurent % 100 != 0)) {
+    nrZile[1] = 29; // Februarie are 29 de zile în an bisect
+}
+
+// Funcție pentru a găsi prima zi de luni din luna dată
+function primaLuni(data) {
+    let date = new Date(data.getFullYear(), data.getMonth(), 1);
+    while (date.getDay() !== 1) {
+        date.setDate(date.getDate() + 1);
+    }
+    return date;
+}
+
+// Funcție pentru a găsi ultimele două weekenduri din luna dată
+function ultimeleDouaWeekenduri(data) {
+    let ultimaZi = new Date(data.getFullYear(), data.getMonth() + 1, 0); // Ultima zi din luna
+    let weekenduri = [];
+    while (weekenduri.length < 4) {
+        if (ultimaZi.getDay() === 6 || ultimaZi.getDay() === 0) { // Dacă este sâmbătă sau duminică
+            weekenduri.push(new Date(ultimaZi));
+        }
+        ultimaZi.setDate(ultimaZi.getDate() - 1);
+    }
+    return weekenduri.reverse().slice(0, 4);
+}
+
+// Evenimentul 'Reducere de început' în prima zi de luni din fiecare lună
+let evenimentReducereStart = { data: primaLuni(d), text: 'Reducere de inceput' };
+
+// Evenimentul 'Promoție weekend' în ultimele două weekenduri din fiecare lună
+let evenimentePromotieWeekend = ultimeleDouaWeekenduri(d).map(date => ({ data: date, text: 'Promotie Weekend' }));
+
+// Trei evenimente alese manual
+let evenimenteAlese = [
+    { data: new Date(anCurent, lunaCurenta, 10), text: 'Show de moda' },
+    { data: new Date(anCurent, lunaCurenta, 15), text: 'Colectie noua' },
+    { data: new Date(anCurent, lunaCurenta, 25), text: 'Eveniment VIP' }
+];
+
+// Combinăm toate evenimentele într-un singur array
+let toateEvenimentele = [evenimentReducereStart, ...evenimentePromotieWeekend, ...evenimenteAlese];
+
+// Obținem ziua săptămânii pentru prima zi a lunii curente
+let primaZiLuna = new Date(anCurent, lunaCurenta, 1);
+let ziSaptPrimaZiLuna = primaZiLuna.getDay();
+if (ziSaptPrimaZiLuna === 0) {
+    ziSaptPrimaZiLuna = 7; // Ajustăm pentru a începe săptămâna de la Luni
+}
+
+// Parcurgem zilele din luna curentă și afișăm evenimentele
+for (let i = 1; i < ziSaptPrimaZiLuna; i++) {
     %>
     <div></div> 
     <% } 
 
-    
-    for (let i=1;i<=nrZileCalendar;i++){
-    var obiectEvenimente=null;
-        if(locals.evenimente)
-                obiectEvenimente=locals.evenimente.find(function(elem){ return elem.data.valueOf()==new Date(anCurent,lunaCurenta,i).valueOf()})
-        if(obiectEvenimente)
-        {
+    for (let i = 1; i <= nrZile[lunaCurenta]; i++) {
+        let ziCurenta = new Date(anCurent, lunaCurenta, i);
+        let obiectEveniment = toateEvenimentele.find(ev => ev.data.getTime() === ziCurenta.getTime());
+        if (obiectEveniment) {
         %>
-        <div class="zi eveniment" title="<%= obiectEvenimente.text %>"><%= i %></div> 
+        <div class="zi eveniment" title="<%= obiectEveniment.text %>"><%= i %></div> 
         <%
-        }
-        else{
+        } else {
     %>
     <div class="zi"><%= i %></div> 
     <% } 
 } %>
 </div>
 <%
-dataServer=new Date();
-sirData=dataServer.getHours()+":"+dataServer.getMinutes()+":"+dataServer.getSeconds()
-
+// Obținem ora curentă a serverului
+let dataServer = new Date();
+let sirData = `${dataServer.getHours()}:${dataServer.getMinutes()}:${dataServer.getSeconds()}`;
 %>

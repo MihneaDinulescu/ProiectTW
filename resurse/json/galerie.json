@@ -5,56 +5,39 @@
 			"fisier_imagine":"tricou.png",
 			"nume_poza":"Tricou Polo",
 			"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-			"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
+			"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
 			},
 			{
 				"fisier_imagine":"tricou.png",
 				"nume_poza":"Tricou Polo",
 				"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-				"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
+				"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
 				},
 				{
 					"fisier_imagine":"tricou.png",
 					"nume_poza":"Tricou Polo",
 					"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-					"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
+					"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
 					},
 					{
 						"fisier_imagine":"tricou.png",
 						"nume_poza":"Tricou Polo",
 						"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-						"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
+						"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
 						},
 						{
 							"fisier_imagine":"tricou.png",
 							"nume_poza":"Tricou Polo",
 							"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-							"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
+							"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
 							},
 							{
 								"fisier_imagine":"tricou.png",
 								"nume_poza":"Tricou Polo",
 								"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-								"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
-								},
-								{
-									"fisier_imagine":"tricou.png",
-									"nume_poza":"Tricou Polo",
-									"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-									"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
-									},
-									{
-										"fisier_imagine":"tricou.png",
-										"nume_poza":"Tricou Polo",
-										"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-										"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
-										},
-										{
-											"fisier_imagine":"tricou.png",
-											"nume_poza":"Tricou Polo",
-											"continut_alternativ":"Tricou Polo", "descriere_poza":"Tricou Polo Barbati",
-											"intervale_zile":[["duminica", "duminica"],["sambata","sambata"]]
-											}
+								"intervale_zile":[["duminica", "luni"],["sambata","sambata"]]
+								}
+								
 											
 		]
 }
